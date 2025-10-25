@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:truly_crazy/core/constants/app_icons.dart';
 import '/core/constants/app_strings.dart';
 import '/core/constants/app_colors.dart';
-import 'package:truly_crazy/core/theme/text_styles.dart';
+import '/core/extensions/textstyle_extensions.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -39,28 +39,28 @@ class SplashScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: first,
-                        style: AppTextStyles.heading(context).copyWith(
-                          fontSize: 34,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primaryLight,
-                          shadows: [
-                            Shadow(
-                              color: Colors.black.withOpacity(0.08),
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
+                        style: context.appTextStyles.heading
+                            .withFontSize(34)
+                            .withFontWeight(FontWeight.w700)
+                            .withFontColor(AppColors.primaryLight)
+                            .copyWith(
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black.withOpacity(0.08),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
                       ),
                       if (second.isNotEmpty) ...[
                         const TextSpan(text: ' '),
                         TextSpan(
                           text: second,
-                          style: AppTextStyles.heading(context).copyWith(
-                            fontSize: 34,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.secondary,
-                          ),
+                          style: context.appTextStyles.heading
+                              .withFontSize(34)
+                              .withFontWeight(FontWeight.w700)
+                              .withFontColor(AppColors.secondary),
                         ),
                       ],
                     ],
@@ -79,11 +79,11 @@ class SplashScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Start Your Love Story ',
-                    style: AppTextStyles.title(context).copyWith(fontSize: 18),
+                    style: context.appTextStyles.title.copyWith(fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
-                  Text(' ❤️ ', style: AppTextStyles.heading(context).copyWith(fontSize: 18)),
+                  Text(' ❤️ ', style: context.appTextStyles.title.copyWith(fontSize: 18)),
                 ],
               ),
             ),

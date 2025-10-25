@@ -67,14 +67,9 @@ class RouteGenerator {
         path: RouteNames.splash,
         name: RouteNames.splash.name,
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return buildPageWithTransition(
-            key: state.pageKey,
-            child: const SplashScreen(),
-            type: PageTransitionType.fade,
-          );
+          return buildPageWithTransition(key: state.pageKey, child: const SplashScreen());
         },
       ),
-      // Additional routes / ShellRoutes can be added here using buildPageWithTransition
     ],
 
     errorBuilder: (context, state) =>
