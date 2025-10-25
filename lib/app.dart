@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/constants/app_strings.dart';
+import 'core/theme/app_theme.dart';
+import 'core/routes/route_generator.dart';
 
 class TrueCrazy extends StatefulWidget {
   const TrueCrazy({super.key});
@@ -11,12 +13,13 @@ class TrueCrazy extends StatefulWidget {
 class _TrueCrazyState extends State<TrueCrazy> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: AppStrings.appName,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('True Crazy App')),
-        body: const Center(child: Text('Welcome to the True Crazy App!')),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      routerConfig: RouteGenerator.router,
     );
   }
 }
