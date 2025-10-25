@@ -18,7 +18,7 @@ class _TrueCrazyState extends State<TrueCrazy> {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       routerConfig: RouteGenerator.router,
     );
   }

@@ -13,12 +13,10 @@ class SplashScreen extends StatelessWidget {
     final second = words.length > 1 ? words.sublist(1).join(' ') : '';
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Column(
           children: [
             const Spacer(),
-
             // Center: Icon + App Name
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
