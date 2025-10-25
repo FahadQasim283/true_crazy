@@ -1,17 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import '/core/constants/api_endpoints.dart';
 import '../local_storage/token_storage.dart';
 
 
 class ApiClient {
-  final String baseUrl = dotenv.env['BASE_URL'] ?? '';
   late final Dio _dio;
 
   ApiClient() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: baseUrl,
+        baseUrl: ApiEndpoints.baseUrl,
         connectTimeout: const Duration(seconds: 51),
         receiveTimeout: const Duration(seconds: 51),
         headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
