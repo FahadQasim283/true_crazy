@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -7,8 +6,8 @@ import '/core/services/deep_link_service.dart';
 import '/core/services/local_storage/token_storage.dart';
 import 'route_config.dart';
 import 'route_names.dart';
-import 'package:true_crazy/presentation/splash_screen.dart';
-import 'package:true_crazy/core/shared/widgets/page_transition_widget.dart';
+import '/presentation/splash_screen.dart';
+import '/core/shared/widgets/page_transition_widget.dart';
 
 // Use the DeepLinkService navigatorKey for navigation and deep linking
 final GlobalKey<NavigatorState> rootNavigatorKey = DeepLinkService.navigatorKey;

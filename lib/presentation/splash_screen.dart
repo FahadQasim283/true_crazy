@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:true_crazy/core/constants/app_strings.dart';
-import 'package:true_crazy/core/constants/app_colors.dart';
+import 'package:truly_crazy/core/constants/app_icons.dart';
+import '/core/constants/app_strings.dart';
+import '/core/constants/app_colors.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -24,37 +25,23 @@ class SplashScreen extends StatelessWidget {
               children: [
                 // App Icon
                 Container(
-                  width: 88,
-                  height: 88,
+                  width: 60,
+                  height: 60,
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.12),
-                        blurRadius: 12,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(20),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/icons/appicon.png'),
-                      fit: BoxFit.cover,
-                    ),
+                    image: const DecorationImage(image: AssetImage(AppIcons.appicon)),
                   ),
                 ),
-
-                const SizedBox(width: 16),
-
-                // App Name split with different colors
                 RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: '$first',
+                        text: first,
                         style: TextStyle(
                           fontSize: 34,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.accentPink,
+                          color: AppColors.primaryLight,
                           shadows: [
                             Shadow(
                               color: Colors.black.withOpacity(0.08),
@@ -71,7 +58,7 @@ class SplashScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 34,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.accentCyan,
+                            color: AppColors.secondary,
                           ),
                         ),
                       ],
@@ -86,11 +73,11 @@ class SplashScreen extends StatelessWidget {
             // Bottom text
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
-              child: Column(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Start Your Love Store',
+                    'Start Your Love Store ',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -99,13 +86,7 @@ class SplashScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    'Read Hard',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                    ),
-                  ),
+                  const Text(' ❤️ ', style: TextStyle(fontSize: 18)),
                 ],
               ),
             ),

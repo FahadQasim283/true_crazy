@@ -3,14 +3,14 @@ import 'core/constants/app_strings.dart';
 import 'core/theme/app_theme.dart';
 import 'core/routes/route_generator.dart';
 
-class TrueCrazy extends StatefulWidget {
-  const TrueCrazy({super.key});
+class TrulyCrazy extends StatefulWidget {
+  const TrulyCrazy({super.key});
 
   @override
-  State<TrueCrazy> createState() => _TrueCrazyState();
+  State<TrulyCrazy> createState() => _TrulyCrazyState();
 }
 
-class _TrueCrazyState extends State<TrueCrazy> {
+class _TrulyCrazyState extends State<TrulyCrazy> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
