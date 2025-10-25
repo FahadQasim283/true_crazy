@@ -34,3 +34,9 @@ flutter:
   assets:
     - assets/icons/
     - .env
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/font/Poppins-Regular.ttf
+        - asset: assets/font/Poppins-Bold.ttf
+          weight: 700

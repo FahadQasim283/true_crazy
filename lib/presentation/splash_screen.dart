@@ -77,7 +77,7 @@ class SplashScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Start Your Love Store ',
+                    'Start Your Love Story ',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
