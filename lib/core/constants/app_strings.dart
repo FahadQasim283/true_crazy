@@ -1,4 +1,4 @@
 class AppStrings {
   AppStrings._();
-  static const String appName = "True Crazy";
+  static const String appName = "Truely Crazy";
 }

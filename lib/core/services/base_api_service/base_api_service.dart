@@ -52,12 +52,6 @@ class ApiClient {
   }
 
   Future<void> _onError(DioException err, ErrorInterceptorHandler handler) async {
-    // Check if this is a login-related error that should be handled by the repository
-    if (_isLoginRelatedError(err)) {
-      // Don't handle this error globally, let the repository handle it
-      handler.next(err);
-      return;
-    }
 
     if (err.response?.statusCode == 401) {
       await TokenStorage.clearAll();
