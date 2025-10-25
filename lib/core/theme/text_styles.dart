@@ -26,3 +26,13 @@ class AppTextStyles {
       .withFontWeight(FontWeight.w400)
       .withFontColor(Theme.of(context).colorScheme.onSurface.withOpacity(0.7));
 }
+
+
+class AppTextStyleAccessor {
+  final BuildContext _context;
+  const AppTextStyleAccessor(this._context);
+  TextStyle get heading => AppTextStyles.heading(_context);
+  TextStyle get title => AppTextStyles.title(_context);
+  TextStyle get body => AppTextStyles.body(_context);
+  TextStyle get small => AppTextStyles.small(_context);
+}
