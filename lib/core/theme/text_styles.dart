@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// App-wide text style helpers. Use these when you need named styles
-/// outside of the Theme, or for quick access to common variants.
 class AppTextStyles {
   AppTextStyles._();
 

@@ -12,14 +12,6 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       fontFamily: 'Poppins',
-      textTheme: TextTheme(
-        headlineLarge: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
-        titleLarge: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-        bodyLarge: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-        bodyMedium: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-        labelLarge: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-      ),
-
       // Color scheme
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,

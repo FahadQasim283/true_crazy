@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:truly_crazy/core/constants/app_icons.dart';
 import '/core/constants/app_strings.dart';
 import '/core/constants/app_colors.dart';
+import 'package:truly_crazy/core/theme/text_styles.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -38,9 +39,9 @@ class SplashScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: first,
-                        style: TextStyle(
+                        style: AppTextStyles.heading(context).copyWith(
                           fontSize: 34,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                           color: AppColors.primaryLight,
                           shadows: [
                             Shadow(
@@ -55,9 +56,9 @@ class SplashScreen extends StatelessWidget {
                         const TextSpan(text: ' '),
                         TextSpan(
                           text: second,
-                          style: TextStyle(
+                          style: AppTextStyles.heading(context).copyWith(
                             fontSize: 34,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             color: AppColors.secondary,
                           ),
                         ),
@@ -78,15 +79,11 @@ class SplashScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Start Your Love Story ',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
+                    style: AppTextStyles.title(context).copyWith(fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
-                  const Text(' ❤️ ', style: TextStyle(fontSize: 18)),
+                  Text(' ❤️ ', style: AppTextStyles.heading(context).copyWith(fontSize: 18)),
                 ],
               ),
             ),
