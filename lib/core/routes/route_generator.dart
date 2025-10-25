@@ -7,6 +7,8 @@ import '/core/services/deep_link_service.dart';
 import '/core/services/local_storage/token_storage.dart';
 import 'route_config.dart';
 import 'route_names.dart';
+import 'package:true_crazy/presentation/splash_screen.dart';
+import 'package:true_crazy/core/shared/widgets/page_transition_widget.dart';
 
 // Use the DeepLinkService navigatorKey for navigation and deep linking
 final GlobalKey<NavigatorState> rootNavigatorKey = DeepLinkService.navigatorKey;
@@ -62,44 +64,18 @@ class RouteGenerator {
     },
     navigatorKey: rootNavigatorKey,
     routes: [
-      // GoRoute(
-      //   path: RouteNames.splash,
-      //   name: RouteNames.splash.name,
-      //   builder: (BuildContext context, GoRouterState state) {
-      //     return const SplashScreen();
-      //   },
-      // ),
-      // ShellRoute(
-      //   navigatorKey: rootNavigatorKey,
-      //   builder: (context, state, child) => MainTabScreen(child: child),
-      //   routes: [
-      //     GoRoute(
-      //       path: '${RouteNames.mainTab}/${RouteNames.home}',
-      //       name: RouteNames.home.name,
-      //       builder: (context, state) => const HomeScreen(),
-      //     ),
-      //     GoRoute(
-      //       path: '${RouteNames.mainTab}/${RouteNames.menue}',
-      //       name: RouteNames.menue.name,
-      //       builder: (context, state) => const MenuScreen(),
-      //     ),
-      //     GoRoute(
-      //       path: '${RouteNames.mainTab}/${RouteNames.orders}',
-      //       name: RouteNames.orders.name,
-      //       builder: (context, state) => const OrdersScreen(),
-      //     ),
-      //     GoRoute(
-      //       path: '${RouteNames.mainTab}/${RouteNames.reels}',
-      //       name: RouteNames.reels.name,
-      //       builder: (context, state) => const ReelsScreen(),
-      //     ),
-      //     GoRoute(
-      //       path: '${RouteNames.mainTab}/${RouteNames.mealPlans}',
-      //       name: RouteNames.mealPlans.name,
-      //       builder: (context, state) => const MealPlansScreen(),
-      //     ),
-      //   ],
-      // ),
+      GoRoute(
+        path: RouteNames.splash,
+        name: RouteNames.splash.name,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithTransition(
+            key: state.pageKey,
+            child: const SplashScreen(),
+            type: PageTransitionType.fade,
+          );
+        },
+      ),
+      // Additional routes / ShellRoutes can be added here using buildPageWithTransition
     ],
 
     errorBuilder: (context, state) =>
