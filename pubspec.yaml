@@ -21,6 +21,7 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_dotenv: ^6.0.0
   flutter_secure_storage: ^9.2.4
+  flutter_otp_text_field: ^1.5.1+1
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +34,7 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/images/
     - .env
   fonts:
     - family: Poppins
