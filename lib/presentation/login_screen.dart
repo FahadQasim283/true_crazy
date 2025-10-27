@@ -180,6 +180,7 @@ class LoginScreen extends StatelessWidget {
                       icon: const Icon(
                         Icons.call,
                         color: Colors.white,
+                        size: 22,
                       ),
                       label: const Text(
                         "Continue with Truecaller",
