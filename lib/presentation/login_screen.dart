@@ -7,162 +7,117 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       body: Stack(
-        fit: StackFit.expand,
         children: [
-          // Background gradient
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0xFFB3E5FC),
-                  Color(0xFFFFCDD2),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-          ),
-
-          // Main content
           SafeArea(
             child: Column(
               children: [
-                // Make the top/middle content scrollable on small screens while
-                // keeping the bottom sheet fixed.
+                // ===== Top Section with Logo + Image =====
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 60),
+                  child: Stack(
+                    children: [
+                      // ===== Couple Image =====
+                      Positioned.fill(
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(40),
+                              bottomRight: Radius.circular(40),
+                            ),
+                            child: Image.network(
+                              'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80',
+                              fit: BoxFit.cover,
+                              alignment: Alignment.center,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: const Color(0xFFECEFF1),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.image_not_supported_outlined,
+                                      color: Colors.grey,
+                                      size: 40,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
 
-                        // Logo and title row
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      // ===== App Logo + Name (Top Left) =====
+                      Positioned(
+                        top: 20,
+                        left: 20,
+                        child: Row(
                           children: [
                             Image.asset(
                               'assets/icons/appicon.png',
-                              height: 40,
+                              height: 36,
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 6),
                             const Text(
                               "trulycrazy",
                               style: TextStyle(
-                                fontSize: 26,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFFEA4C89),
+                                color: Color(0xFFEA4C89), // pink accent
                               ),
                             ),
                           ],
                         ),
+                      ),
 
-                        const SizedBox(height: 5),
-                        const Text(
-                          "Start your love story!",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-
-                        const SizedBox(height: 30),
-
-                        // Container with Stack for image + overlay text chip
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  'assets/images/couple_image.png',
-                                  width: double.infinity,
-                                  height: MediaQuery.of(context).size.height * 0.35,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                      width: double.infinity,
-                                      height: MediaQuery.of(context).size.height * 0.35,
-                                      color: const Color(0xFFECEFF1),
-                                      alignment: Alignment.center,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: const [
-                                          Icon(
-                                            Icons.image_not_supported,
-                                            size: 48,
-                                            color: Colors.black26,
-                                          ),
-                                          SizedBox(height: 8),
-                                          Text(
-                                            'Image not available',
-                                            style: TextStyle(
-                                              color: Colors.black38,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                      // ===== Language Button (Top Right) =====
+                      Positioned(
+                        top: 20,
+                        right: 20,
+                        child: GestureDetector(
+                          onTap: () {
+                            _languageSelectionBottomSheet(context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.9),
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12.withOpacity(0.1),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
                                 ),
-                              ),
-
-                              // Overlay text chip
-                              Positioned(
-                                bottom: 20,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 10,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(30),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: "Start your love Story ",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: "with TrulyMadly",
-                                          style: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                              ],
+                            ),
+                            child: Row(
+                              children: const [
+                                Text(
+                                  'A',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blueAccent,
                                   ),
                                 ),
-                              ),
-                            ],
+                                SizedBox(width: 4),
+                                Text(
+                                  'आ',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFEA4C89),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
 
-                // Bottom sheet container (fixed)
+                // ===== Bottom Section (Login Buttons) =====
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -183,7 +138,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Google button
+                      // Google Button
                       ElevatedButton.icon(
                         onPressed: () {},
                         icon: Image.asset(
@@ -209,7 +164,7 @@ class LoginScreen extends StatelessWidget {
 
                       const SizedBox(height: 16),
 
-                      // Truecaller button
+                      // Truecaller Button
                       ElevatedButton.icon(
                         onPressed: () {},
                         icon: const Icon(
@@ -236,7 +191,6 @@ class LoginScreen extends StatelessWidget {
 
                       const SizedBox(height: 20),
 
-                      // Continue with Mobile text
                       GestureDetector(
                         onTap: () {
                           _mobileLoginBottomSheet(context);
@@ -253,7 +207,6 @@ class LoginScreen extends StatelessWidget {
 
                       const SizedBox(height: 20),
 
-                      // Terms & Privacy Policy text
                       const Text.rich(
                         TextSpan(
                           children: [
@@ -299,7 +252,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
   Future  _mobileLoginBottomSheet(BuildContext context) {
     return showModalBottomSheet(
               context: context,
@@ -585,7 +537,7 @@ class LoginScreen extends StatelessWidget {
                         // ===== Submit Button =====
                         ElevatedButton(
                           onPressed: () {
-                            _languageSelectionBottomSheet(context);
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const MainScreen()));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:  Colors.blueAccent,
@@ -758,7 +710,6 @@ class LoginScreen extends StatelessWidget {
                               onPressed: () {
                                 debugPrint(
                                     "Selected Language: $selectedLang");
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const SuggestedScreen()));
                               
                               },
                               style: ElevatedButton.styleFrom(
