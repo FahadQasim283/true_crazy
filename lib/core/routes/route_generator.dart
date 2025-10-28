@@ -8,6 +8,7 @@ import 'route_config.dart';
 import 'route_names.dart';
 import '/presentation/splash_screen.dart';
 import '/core/shared/widgets/page_transition_widget.dart';
+import '/presentation/login_screen.dart';
 
 // Use the DeepLinkService navigatorKey for navigation and deep linking
 final GlobalKey<NavigatorState> rootNavigatorKey = DeepLinkService.navigatorKey;
@@ -69,6 +70,15 @@ class RouteGenerator {
         pageBuilder: (BuildContext context, GoRouterState state) {
           return buildPageWithTransition(key: state.pageKey, child: const SplashScreen());
         },
+      ),
+      GoRoute(
+        path: RouteNames.login,
+        name: RouteNames.login.name,
+        pageBuilder: (context, state) => buildPageWithTransition(
+          key: state.pageKey,
+          child: const LoginScreen(),
+          type: PageTransitionType.slideFromRight,
+        ),
       ),
     ],
 

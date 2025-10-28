@@ -282,7 +282,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
     required Color color,
   }) {
     return Container(
-      height: 65,
+      height: 75,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10),

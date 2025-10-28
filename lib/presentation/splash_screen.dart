@@ -3,9 +3,35 @@ import 'package:truly_crazy/core/constants/app_icons.dart';
 import '/core/constants/app_strings.dart';
 import '/core/constants/app_colors.dart';
 import '/core/extensions/textstyle_extensions.dart';
+import 'dart:async';
+import 'package:go_router/go_router.dart';
+import '/core/routes/route_names.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer(const Duration(seconds: 3), () {
+      if (mounted) {
+        context.go(RouteNames.login);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
