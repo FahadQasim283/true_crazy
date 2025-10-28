@@ -287,7 +287,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
         color: color,
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Row(
         children: [
           Container(
