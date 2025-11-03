@@ -260,7 +260,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                 children: [
                   _roundAction(Icons.close, Colors.black54,
                       bgColor: Colors.black.withOpacity(0.08)),
-                  _roundAction(Icons.chat, blueButton,
+                  _roundAction(Icons.chat_bubble_outline, blueButton,
                       bgColor: blueButton.withOpacity(0.12)),
                   _roundAction(Icons.check, greenButton,
                       bgColor: greenButton.withOpacity(0.12)),
@@ -328,7 +328,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
       width: 58,
       height: 58,
       decoration: BoxDecoration(
-        color: bgColor ?? Colors.grey.withOpacity(0.12),
+        color: bgColor ?? Colors.grey,
         shape: BoxShape.circle,
       ),
       child: Icon(icon, color: iconColor, size: 26),
