@@ -260,7 +260,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                 children: [
                   _roundAction(Icons.close, Colors.black54,
                       bgColor: Colors.black.withOpacity(0.08)),
-                  _roundAction(Icons.stacked_line_chart, blueButton,
+                  _roundAction(Icons.chat, blueButton,
                       bgColor: blueButton.withOpacity(0.12)),
                   _roundAction(Icons.check, greenButton,
                       bgColor: greenButton.withOpacity(0.12)),
