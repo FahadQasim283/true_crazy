@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:truly_crazy/core/constants/app_colors.dart';
 import 'package:truly_crazy/presentation/detail_screen.dart';
 
@@ -13,7 +14,7 @@ class TmcafeScreen extends StatefulWidget {
 class _TmcafeScreenState extends State<TmcafeScreen> {
   final List<String> textItems = [
     'When will I find\nmy true love?',
-    'Feeling lonely small\nthings make me happy'
+    'Feeling lonely small\nthings make me happy',
   ];
 
   final List<Map<String, dynamic>> profiles = [
@@ -76,10 +77,7 @@ class _TmcafeScreenState extends State<TmcafeScreen> {
                   decoration: BoxDecoration(
                     color: isSelected ? Colors.blue : Colors.blue,
                     borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: Colors.blue,
-                      width: 1.3,
-                    ),
+                    border: Border.all(color: Colors.blue, width: 1.3),
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
@@ -95,8 +93,7 @@ class _TmcafeScreenState extends State<TmcafeScreen> {
                     buttonLabels[index],
                     style: TextStyle(
                       color: isSelected ? Colors.white : Colors.white,
-                      fontWeight:
-                          isSelected ? FontWeight.bold : FontWeight.w500,
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                       fontSize: 15,
                     ),
                   ),
@@ -126,33 +123,60 @@ class _TmcafeScreenState extends State<TmcafeScreen> {
                       color: AppColors.textPrimary,
                     ),
                   ),
-                  Container(
-                    width: 70,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.dividerDark,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Text(
-                          '\$ 0',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: AppColors.textOnPrimary,
+                  Row(
+                    children: [
+                      // Events Button
+                      GestureDetector(
+                        onTap: () {
+                          context.push('/events');
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors.primary),
+                          ),
+                          child: Row(
+                            children: const [
+                              Icon(Icons.event_rounded, size: 18, color: AppColors.primary),
+                              SizedBox(width: 4),
+                              Text(
+                                'Events',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        VerticalDivider(color: Colors.grey, width: 1),
-                        Text(
-                          '+',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: AppColors.textOnPrimary,
-                          ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        width: 70,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.dividerDark,
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                      ],
-                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Text(
+                              '\$ 0',
+                              style: TextStyle(fontSize: 16, color: AppColors.textOnPrimary),
+                            ),
+                            VerticalDivider(color: Colors.grey, width: 1),
+                            Text(
+                              '+',
+                              style: TextStyle(fontSize: 16, color: AppColors.textOnPrimary),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -199,11 +223,7 @@ class _TmcafeScreenState extends State<TmcafeScreen> {
                     ),
                   );
                 },
-                options: CarouselOptions(
-                  height: 100.0,
-                  autoPlay: false,
-                  viewportFraction: 0.9,
-                ),
+                options: CarouselOptions(height: 100.0, autoPlay: false, viewportFraction: 0.9),
               ),
 
               const SizedBox(height: 16),
@@ -217,13 +237,14 @@ class _TmcafeScreenState extends State<TmcafeScreen> {
                     final profile = profiles[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DetailScreen()),
+                        );
                       },
                       child: Card(
                         elevation: 3,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         margin: const EdgeInsets.symmetric(vertical: 8),
                         child: Padding(
                           padding: const EdgeInsets.all(12),
@@ -249,41 +270,30 @@ class _TmcafeScreenState extends State<TmcafeScreen> {
                                     const SizedBox(height: 4),
                                     Row(
                                       children: [
-                                        const Icon(Icons.star,
-                                            color: Colors.grey, size: 18),
+                                        const Icon(Icons.star, color: Colors.grey, size: 18),
                                         const SizedBox(width: 4),
                                         Text(
                                           profile['rating'].toString(),
                                           style: const TextStyle(fontSize: 14),
                                         ),
                                         const SizedBox(width: 12),
-                                        const Icon(Icons.access_time,
-                                            color: Colors.grey, size: 16),
+                                        const Icon(Icons.access_time, color: Colors.grey, size: 16),
                                         const SizedBox(width: 4),
                                         Text(
                                           profile['hours'],
-                                          style: const TextStyle(
-                                            fontSize: 13,
-                                            color: Colors.grey,
-                                          ),
+                                          style: const TextStyle(fontSize: 13, color: Colors.grey),
                                         ),
                                       ],
                                     ),
                                     const SizedBox(height: 6),
                                     Text(
                                       profile['dating'],
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey,
-                                      ),
+                                      style: const TextStyle(fontSize: 14, color: Colors.grey),
                                     ),
                                     const SizedBox(height: 6),
                                     const Text(
                                       'Empower your connections with Truly Crazy - where every match is a step towards something extraordinary.',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.black87,
-                                      ),
+                                      style: TextStyle(fontSize: 13, color: Colors.black87),
                                     ),
                                     const SizedBox(height: 10),
                                     Align(
@@ -293,11 +303,12 @@ class _TmcafeScreenState extends State<TmcafeScreen> {
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.grey,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
+                                            borderRadius: BorderRadius.circular(12),
                                           ),
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 16, vertical: 8),
+                                            horizontal: 16,
+                                            vertical: 8,
+                                          ),
                                         ),
                                         child: const Text(
                                           "On Call",

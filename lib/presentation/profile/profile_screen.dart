@@ -143,6 +143,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 children: [
                   _buildMenuTile(
+                    icon: Icons.stars_rounded,
+                    title: 'Top Members',
+                    iconColor: AppColors.primary,
+                    onTap: () {
+                      context.push('/influencers');
+                    },
+                  ),
+                  _buildDivider(),
+                  _buildMenuTile(
+                    icon: Icons.event_rounded,
+                    title: 'Events & Meetups',
+                    iconColor: AppColors.accentPink,
+                    onTap: () {
+                      context.push('/events');
+                    },
+                  ),
+                  _buildDivider(),
+                  _buildMenuTile(
                     icon: Icons.account_balance_wallet_rounded,
                     title: 'Add Bank',
                     iconColor: AppColors.accentCyan,
@@ -156,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'Settings',
                     iconColor: AppColors.textSecondary,
                     onTap: () {
-                      // Navigate to settings
+                      context.push('/settings');
                     },
                   ),
                   _buildDivider(),

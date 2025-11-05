@@ -10,12 +10,30 @@ import '/presentation/splash_screen.dart';
 import '/core/shared/widgets/page_transition_widget.dart';
 import '/presentation/login_screen.dart';
 import '/presentation/profile/update_profile_screen.dart';
+import '/presentation/influencers_screen.dart';
+import '/presentation/influencer_details_screen.dart';
+import '/presentation/events_screen.dart';
+import '/presentation/settings_screen.dart';
+import '/presentation/suggested_screen.dart';
 
 // Use the DeepLinkService navigatorKey for navigation and deep linking
 final GlobalKey<NavigatorState> rootNavigatorKey = DeepLinkService.navigatorKey;
 
 class RouteGenerator {
+  // Simple in-memory auth flag for development
+  static bool _devAuthBypass = false;
+
+  static void setAuthBypass(bool value) {
+    _devAuthBypass = value;
+  }
+
   static Future<bool> _isAuthenticated() async {
+    // In development mode, use the bypass flag
+    if (kDebugMode && _devAuthBypass) {
+      debugPrint('Using development auth bypass');
+      return true;
+    }
+
     final userData = await TokenStorage.getUserData();
     if (userData == null || userData.isEmpty) {
       debugPrint('User is not authenticated');
@@ -47,17 +65,19 @@ class RouteGenerator {
     redirect: (BuildContext context, GoRouterState state) async {
       final String location = state.matchedLocation;
       final bool isAuthenticated = await _isAuthenticated();
+
       if (isAuthenticated && (location == RouteNames.splash || location == RouteNames.onboarding)) {
-        debugPrint('Redirecting from splash/onboarding to home');
-        return '${RouteNames.mainTab}/${RouteNames.home}';
+        debugPrint('Redirecting from splash/onboarding to main');
+        return RouteNames.mainTab;
       }
       if (location == RouteNames.splash) {
         debugPrint('Redirecting from splash to onboarding');
         return null;
       }
 
+      // Don't redirect if navigating to public routes or if already authenticated
       if (!isAuthenticated && RouteConfig.requiresAuth(location)) {
-        debugPrint('Redirecting to login from unauthenticated route: $location cation');
+        debugPrint('Redirecting to login from unauthenticated route: $location');
         return RouteNames.login;
       }
 
@@ -82,11 +102,59 @@ class RouteGenerator {
         ),
       ),
       GoRoute(
+        path: RouteNames.mainTab,
+        name: RouteNames.mainTab.name,
+        pageBuilder: (context, state) => buildPageWithTransition(
+          key: state.pageKey,
+          child: const MainScreen(),
+          type: PageTransitionType.fade,
+        ),
+      ),
+      GoRoute(
         path: '/update-profile',
         name: 'updateProfile',
         pageBuilder: (context, state) => buildPageWithTransition(
           key: state.pageKey,
           child: const UpdateProfileScreen(),
+          type: PageTransitionType.slideFromRight,
+        ),
+      ),
+      GoRoute(
+        path: RouteNames.influencers,
+        name: RouteNames.influencers.name,
+        pageBuilder: (context, state) => buildPageWithTransition(
+          key: state.pageKey,
+          child: const InfluencersScreen(),
+          type: PageTransitionType.slideFromRight,
+        ),
+      ),
+      GoRoute(
+        path: '${RouteNames.influencerDetails}/:id',
+        name: RouteNames.influencerDetails.name,
+        pageBuilder: (context, state) {
+          final influencer = state.extra as Map<String, dynamic>;
+          return buildPageWithTransition(
+            key: state.pageKey,
+            child: InfluencerDetailsScreen(influencer: influencer),
+            type: PageTransitionType.slideFromRight,
+          );
+        },
+      ),
+      GoRoute(
+        path: RouteNames.events,
+        name: RouteNames.events.name,
+        pageBuilder: (context, state) => buildPageWithTransition(
+          key: state.pageKey,
+          child: const EventsScreen(),
+          type: PageTransitionType.slideFromRight,
+        ),
+      ),
+      GoRoute(
+        path: RouteNames.settings,
+        name: RouteNames.settings.name,
+        pageBuilder: (context, state) => buildPageWithTransition(
+          key: state.pageKey,
+          child: const SettingsScreen(),
           type: PageTransitionType.slideFromRight,
         ),
       ),
