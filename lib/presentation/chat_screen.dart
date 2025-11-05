@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/extensions/textstyle_extensions.dart';
+import '../../core/shared/widgets/premium_purchase_bottom_sheet.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -490,14 +491,25 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _showPlusPlanBottomSheet() {
-    // TODO: Implement plus plan bottom sheet
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Plus plan bottom sheet will be implemented later'),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        margin: EdgeInsets.all(16),
-      ),
+    // Example with discount and timer
+    PremiumPurchaseBottomSheet.show(
+      context,
+      plans: PremiumPlanHelper.getDefaultPlans(includeDiscount: true),
+      offerDuration: const Duration(hours: 20), // 20 hours timer
+      title: 'Upgrade to Truly Crazy Plus',
+      subtitle: 'Unlock unlimited chats and find your perfect match today!',
+      onPurchase: (plan) {
+        // Handle purchase
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Purchasing ${plan.duration} plan for ₹${plan.finalPrice.toInt()}'),
+            backgroundColor: AppColors.success,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            margin: const EdgeInsets.all(16),
+          ),
+        );
+      },
     );
   }
 }
