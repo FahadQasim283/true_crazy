@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:go_router/go_router.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import '../core/routes/route_generator.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final List<String> _images = [
+    'assets/images/couple2.jpg',
+    'assets/images/girl1.jpg',
+    'assets/images/girl2.jpg',
+    'assets/images/girl3.jpg',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    // Pre-cache all carousel images for better performance
+    for (final imagePath in _images) {
+      precacheImage(AssetImage(imagePath), context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,33 +41,39 @@ class LoginScreen extends StatelessWidget {
                 Expanded(
                   child: Stack(
                     children: [
-                      // ===== Couple Image =====
-                      Positioned.fill(
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(40),
-                            bottomRight: Radius.circular(40),
-                          ),
-                          child: Image.network(
-                            'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80',
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                            errorBuilder: (context, error, stackTrace) {
+                      // ===== Couple Images Carousel =====
+                      Positioned(
+                        top: 60,
+                        left: 0,
+                        right: 0,
+                        child: SizedBox(
+                          height: 300,
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              height: double.infinity,
+                              aspectRatio: 16 / 9,
+                              autoPlay: true,
+                              autoPlayCurve: Curves.easeInOut,
+                              enlargeCenterPage: false,
+                            ),
+                            items: _images.map((imagePath) {
                               return Container(
-                                color: const Color(0xFFECEFF1),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.image_not_supported_outlined,
-                                    color: Colors.grey,
-                                    size: 40,
+                                width: MediaQuery.of(context).size.width,
+                                margin: const EdgeInsets.symmetric(horizontal: 4),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.asset(
+                                    imagePath,
+                                    fit: BoxFit.fill,
+                                    width: double.infinity,
+                                    height: double.infinity,
                                   ),
                                 ),
                               );
-                            },
+                            }).toList(),
                           ),
                         ),
                       ),
-
                       // ===== App Logo + Name (Top Left) =====
                       Positioned(
                         top: 20,

@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
               color: Colors.black.withOpacity(0.04),
               blurRadius: 8,
               offset: const Offset(0, -2),
-            )
+            ),
           ],
         ),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -61,23 +61,21 @@ class _MainScreenState extends State<MainScreen> {
                   right: -10,
                   top: -6,
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                     decoration: BoxDecoration(
                       color: Colors.redAccent,
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
-                        BoxShadow(
-                            color: Colors.redAccent.withOpacity(0.25),
-                            blurRadius: 6)
+                        BoxShadow(color: Colors.redAccent.withOpacity(0.25), blurRadius: 6),
                       ],
                     ),
                     child: const Text(
                       "7",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700),
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
@@ -105,20 +103,10 @@ class _MainScreenState extends State<MainScreen> {
               color: isActive ? pinkBadge.withOpacity(0.08) : Colors.transparent,
               borderRadius: BorderRadius.circular(10),
               boxShadow: isActive
-                  ? [
-                      BoxShadow(
-                        color: pinkBadge.withOpacity(0.14),
-                        blurRadius: 8,
-                        spreadRadius: 1,
-                      )
-                    ]
+                  ? [BoxShadow(color: pinkBadge.withOpacity(0.14), blurRadius: 8, spreadRadius: 1)]
                   : [],
             ),
-            child: Icon(
-              icon,
-              size: 24,
-              color: isActive ? pinkBadge : Colors.black54,
-            ),
+            child: Icon(icon, size: 24, color: isActive ? pinkBadge : Colors.black54),
           ),
           const SizedBox(height: 2),
           Text(
@@ -128,12 +116,13 @@ class _MainScreenState extends State<MainScreen> {
               fontSize: 11,
               fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
+
 class SuggestedScreen extends StatefulWidget {
   const SuggestedScreen({super.key});
 
@@ -173,8 +162,8 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                 borderRadius: BorderRadius.circular(12),
                 child: Stack(
                   children: [
-                    Image.network(
-                      'https://picsum.photos/id/1011/400/400',
+                    Image.asset(
+                      'assets/images/couple_image.jpg',
                       height: 380,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -185,16 +174,11 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                       child: Container(
                         width: 55,
                         height: 55,
-                        decoration: BoxDecoration(
-                          color: pinkBadge,
-                          shape: BoxShape.circle,
-                        ),
+                        decoration: BoxDecoration(color: pinkBadge, shape: BoxShape.circle),
                         child: const Center(
                           child: Text(
                             '50%',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
@@ -207,26 +191,16 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
               // ===== Profile Details =====
               const Text(
                 'I, 29, 160 cm',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.black,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.black),
               ),
               const SizedBox(height: 4),
-              const Text(
-                'Lives in Delhi',
-                style: TextStyle(fontSize: 14, color: Colors.black54),
-              ),
+              const Text('Lives in Delhi', style: TextStyle(fontSize: 14, color: Colors.black54)),
               const SizedBox(height: 20),
 
               // ===== Compatibility Section =====
               const Text(
                 'Check Your Compatibility',
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: Colors.black87),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black87),
               ),
               const SizedBox(height: 12),
 
@@ -258,12 +232,17 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _roundAction(Icons.close, Colors.black54,
-                      bgColor: Colors.black.withOpacity(0.08)),
-                  _roundAction(Icons.chat_bubble_outline, blueButton,
-                      bgColor: blueButton.withOpacity(0.12)),
-                  _roundAction(Icons.check, greenButton,
-                      bgColor: greenButton.withOpacity(0.12)),
+                  _roundAction(
+                    Icons.close,
+                    Colors.black54,
+                    bgColor: Colors.black.withOpacity(0.08),
+                  ),
+                  _roundAction(
+                    Icons.chat_bubble_outline,
+                    blueButton,
+                    bgColor: blueButton.withOpacity(0.12),
+                  ),
+                  _roundAction(Icons.check, greenButton, bgColor: greenButton.withOpacity(0.12)),
                 ],
               ),
               const SizedBox(height: 30),
@@ -283,18 +262,12 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
   }) {
     return Container(
       height: 75,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10),
-      ),
+      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(10)),
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Row(
         children: [
           Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
+            decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
             width: 38,
             height: 38,
             child: Icon(icon, size: 18, color: Colors.black54),
@@ -305,14 +278,15 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 13)),
-                Text(subtitle,
-                    style: const TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12)),
+                Text(title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                  ),
+                ),
               ],
             ),
           ),
@@ -327,10 +301,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
     return Container(
       width: 58,
       height: 58,
-      decoration: BoxDecoration(
-        color: bgColor ?? Colors.grey,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: bgColor ?? Colors.grey, shape: BoxShape.circle),
       child: Icon(icon, color: iconColor, size: 26),
     );
   }
