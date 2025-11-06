@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       // ===== Couple Images Carousel =====
                       Positioned(
-                        top: 60,
+                        top: 85,
                         left: 0,
                         right: 0,
                         child: SizedBox(
@@ -168,7 +168,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       // Google Button
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          RouteGenerator.setAuthBypass(true);
+                          context.go('/main');
+                        },
                         icon: Image.asset('assets/images/google_icon.png', height: 22),
                         label: const Text(
                           "Google",
@@ -186,7 +189,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       // Truecaller Button
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          RouteGenerator.setAuthBypass(true);
+                          context.go('/main');
+                        },
                         icon: const Icon(Icons.call, color: Colors.white, size: 22),
                         label: const Text(
                           "Continue with Truecaller",

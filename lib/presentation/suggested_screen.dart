@@ -163,7 +163,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                 child: Stack(
                   children: [
                     Image.asset(
-                      'assets/images/couple_image.jpg',
+                      'assets/images/girl1.jpg',
                       height: 380,
                       width: double.infinity,
                       fit: BoxFit.cover,

@@ -116,36 +116,6 @@ class _EventsScreenState extends State<EventsScreen> {
     },
   ];
 
-  final List<Map<String, dynamic>> _pastEvents = [
-    {
-      'id': '7',
-      'title': 'Valentine\'s Love Gala 2025',
-      'date': 'Feb 14, 2025',
-      'attendees': 150,
-      'rating': 4.8,
-      'image': 'https://picsum.photos/400/200?random=34',
-      'matches': 42,
-    },
-    {
-      'id': '8',
-      'title': 'Summer Beach Dating Party',
-      'date': 'Jul 20, 2025',
-      'attendees': 120,
-      'rating': 4.9,
-      'image': 'https://picsum.photos/400/200?random=35',
-      'matches': 35,
-    },
-    {
-      'id': '9',
-      'title': 'Monsoon Romance Meetup',
-      'date': 'Aug 10, 2025',
-      'attendees': 80,
-      'rating': 4.7,
-      'image': 'https://picsum.photos/400/200?random=38',
-      'matches': 28,
-    },
-  ];
-
   String _selectedCategory = 'All';
   final List<String> _categories = [
     'All',
@@ -184,68 +154,48 @@ class _EventsScreenState extends State<EventsScreen> {
           ),
         ],
       ),
-      body: DefaultTabController(
-        length: 2,
-        child: Column(
-          children: [
-            // Category Filter
-            Container(
-              height: 60,
-              color: AppColors.surface,
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                scrollDirection: Axis.horizontal,
-                itemCount: _categories.length,
-                itemBuilder: (context, index) {
-                  final category = _categories[index];
-                  final isSelected = _selectedCategory == category;
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: FilterChip(
-                      label: Text(category),
-                      selected: isSelected,
-                      onSelected: (selected) {
-                        setState(() {
-                          _selectedCategory = category;
-                        });
-                      },
-                      backgroundColor: AppColors.background,
-                      selectedColor: AppColors.primary.withOpacity(0.2),
-                      labelStyle: context.appTextStyles.body
-                          .withFontSize(13)
-                          .withFontColor(isSelected ? AppColors.primary : AppColors.textSecondary)
-                          .withFontWeight(isSelected ? FontWeight.w600 : FontWeight.w400),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: isSelected ? AppColors.primary : AppColors.divider),
-                      ),
+      body: Column(
+        children: [
+          // Category Filter
+          Container(
+            height: 60,
+            color: AppColors.surface,
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              scrollDirection: Axis.horizontal,
+              itemCount: _categories.length,
+              itemBuilder: (context, index) {
+                final category = _categories[index];
+                final isSelected = _selectedCategory == category;
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: FilterChip(
+                    label: Text(category),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      setState(() {
+                        _selectedCategory = category;
+                      });
+                    },
+                    backgroundColor: AppColors.background,
+                    selectedColor: AppColors.primary.withOpacity(0.2),
+                    labelStyle: context.appTextStyles.body
+                        .withFontSize(13)
+                        .withFontColor(isSelected ? AppColors.primary : AppColors.textSecondary)
+                        .withFontWeight(isSelected ? FontWeight.w600 : FontWeight.w400),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(color: isSelected ? AppColors.primary : AppColors.divider),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
+          ),
 
-            // Tabs
-            Container(
-              color: AppColors.surface,
-              child: TabBar(
-                indicatorColor: AppColors.primary,
-                labelColor: AppColors.primary,
-                unselectedLabelColor: AppColors.textSecondary,
-                labelStyle: context.appTextStyles.body
-                    .withFontSize(14)
-                    .withFontWeight(FontWeight.w600),
-                tabs: const [
-                  Tab(text: 'Upcoming'),
-                  Tab(text: 'Past Events'),
-                ],
-              ),
-            ),
-
-            // Tab Views
-            Expanded(child: TabBarView(children: [_buildUpcomingEvents(), _buildPastEvents()])),
-          ],
-        ),
+          // Events List
+          Expanded(child: _buildUpcomingEvents()),
+        ],
       ),
     );
   }
@@ -257,17 +207,6 @@ class _EventsScreenState extends State<EventsScreen> {
       itemBuilder: (context, index) {
         final event = _upcomingEvents[index];
         return _buildEventCard(event);
-      },
-    );
-  }
-
-  Widget _buildPastEvents() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: _pastEvents.length,
-      itemBuilder: (context, index) {
-        final event = _pastEvents[index];
-        return _buildPastEventCard(event);
       },
     );
   }
@@ -296,20 +235,24 @@ class _EventsScreenState extends State<EventsScreen> {
           // Image
           Stack(
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                child: Image.network(
-                  event['image'],
-                  height: 160,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      height: 160,
-                      color: AppColors.primaryLight.withOpacity(0.2),
-                      child: Icon(Icons.event_rounded, size: 60, color: AppColors.primary),
-                    );
-                  },
+              Positioned(
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                  child: Image.network(
+                    event['image'],
+                    height: 160,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Center(
+                        child: Container(
+                          height: 160,
+
+                          child: Icon(Icons.event_rounded, size: 60, color: AppColors.primary),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               if (isFeatured)
@@ -537,108 +480,6 @@ class _EventsScreenState extends State<EventsScreen> {
                   ),
                 ),
               ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPastEventCard(Map<String, dynamic> event) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: AppColors.black10, blurRadius: 8, offset: const Offset(0, 2))],
-      ),
-      child: Row(
-        children: [
-          // Image
-          ClipRRect(
-            borderRadius: const BorderRadius.horizontal(left: Radius.circular(16)),
-            child: Image.network(
-              event['image'],
-              height: 100,
-              width: 100,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  height: 100,
-                  width: 100,
-                  color: AppColors.primaryLight.withOpacity(0.2),
-                  child: Icon(Icons.event_rounded, size: 40, color: AppColors.primary),
-                );
-              },
-            ),
-          ),
-
-          // Content
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    event['title'],
-                    style: context.appTextStyles.title
-                        .withFontSize(15)
-                        .withFontWeight(FontWeight.w600),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.calendar_today_rounded, size: 14, color: AppColors.textHint),
-                      const SizedBox(width: 6),
-                      Text(
-                        event['date'],
-                        style: context.appTextStyles.small
-                            .withFontSize(12)
-                            .withFontColor(AppColors.textHint),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      Icon(Icons.people_rounded, size: 14, color: AppColors.textSecondary),
-                      const SizedBox(width: 6),
-                      Text(
-                        '${event['attendees']} attended',
-                        style: context.appTextStyles.small
-                            .withFontSize(12)
-                            .withFontColor(AppColors.textSecondary),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      Icon(Icons.favorite_rounded, size: 14, color: AppColors.accentPink),
-                      const SizedBox(width: 6),
-                      Text(
-                        '${event['matches']} matches made',
-                        style: context.appTextStyles.small
-                            .withFontSize(12)
-                            .withFontWeight(FontWeight.w600)
-                            .withFontColor(AppColors.accentPink),
-                      ),
-                      const SizedBox(width: 12),
-                      Icon(Icons.star_rounded, size: 14, color: AppColors.accentYellow),
-                      const SizedBox(width: 4),
-                      Text(
-                        '${event['rating']}',
-                        style: context.appTextStyles.small
-                            .withFontSize(12)
-                            .withFontWeight(FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ),
         ],
