@@ -22,7 +22,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     // Pre-cache all carousel images for better performance
+    // This is called after initState and whenever dependencies change
     for (final imagePath in _images) {
       precacheImage(AssetImage(imagePath), context);
     }
