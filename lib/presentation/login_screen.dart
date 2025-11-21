@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:go_router/go_router.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../core/routes/route_generator.dart';
+import '../core/services/local_storage/token_storage.dart';
+import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,6 +33,23 @@ class _LoginScreenState extends State<LoginScreen> {
     for (final imagePath in _images) {
       precacheImage(AssetImage(imagePath), context);
     }
+  }
+
+  Future<void> _simulateAuthentication() async {
+    // Simulate successful OTP verification and authentication
+    const mockAccessToken = 'mock_access_token_12345';
+    const mockRefreshToken = 'mock_refresh_token_67890';
+    const mockUserData = {
+      'id': 'user_123',
+      'phone': '+917519082385',
+      'isVerified': true,
+      'name': 'Test User',
+      'email': 'test@example.com',
+    };
+
+    // Save tokens and user data to simulate authentication
+    await TokenStorage.saveTokens(accessToken: mockAccessToken, refreshToken: mockRefreshToken);
+    await TokenStorage.saveUserData(jsonEncode(mockUserData));
   }
 
   @override
@@ -168,9 +186,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       // Google Button
                       ElevatedButton.icon(
-                        onPressed: () {
-                          RouteGenerator.setAuthBypass(true);
-                          context.go('/main');
+                        onPressed: () async {
+                          // TODO: Implement actual Google OAuth
+                          await _simulateAuthentication();
+                          if (mounted) {
+                            context.go('/main');
+                          }
                         },
                         icon: Image.asset('assets/images/google_icon.png', height: 22),
                         label: const Text(
@@ -189,9 +210,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       // Truecaller Button
                       ElevatedButton.icon(
-                        onPressed: () {
-                          RouteGenerator.setAuthBypass(true);
-                          context.go('/main');
+                        onPressed: () async {
+                          // TODO: Implement actual Truecaller integration
+                          await _simulateAuthentication();
+                          if (mounted) {
+                            context.go('/main');
+                          }
                         },
                         icon: const Icon(Icons.call, color: Colors.white, size: 22),
                         label: const Text(
@@ -499,10 +523,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 // ===== Submit Button =====
                 ElevatedButton(
-                  onPressed: () {
-                    // Set auth bypass for development
-                    RouteGenerator.setAuthBypass(true);
-                    context.go('/main');
+                  onPressed: () async {
+                    // TODO: Implement actual OTP verification API call
+                    // For now, simulate successful authentication
+                    await _simulateAuthentication();
+                    if (mounted) {
+                      context.go('/main');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
