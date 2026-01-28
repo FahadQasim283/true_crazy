@@ -8,6 +8,10 @@ class RouteConfig {
   static const Set<String> _authenticatedRoutes = {
     RouteNames.mainTab,
     '${RouteNames.mainTab}/${RouteNames.home}',
+    RouteNames.influencers,
+    RouteNames.influencerDetails,
+    RouteNames.events,
+    RouteNames.settings,
     // Add more authenticated routes as needed
   };
 

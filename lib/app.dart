@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'core/constants/app_strings.dart';
+import 'core/theme/app_theme.dart';
+import 'core/routes/route_generator.dart';
 
-class TrueCrazy extends StatefulWidget {
-  const TrueCrazy({super.key});
+class TrulyCrazy extends StatefulWidget {
+  const TrulyCrazy({super.key});
 
   @override
-  State<TrueCrazy> createState() => _TrueCrazyState();
+  State<TrulyCrazy> createState() => _TrulyCrazyState();
 }
 
-class _TrueCrazyState extends State<TrueCrazy> {
+class _TrulyCrazyState extends State<TrulyCrazy> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: AppStrings.appName,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('True Crazy App')),
-        body: const Center(child: Text('Welcome to the True Crazy App!')),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light,
+      routerConfig: RouteGenerator.router,
     );
   }
 }

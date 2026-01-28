@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart' show TextStyle, FontWeight, FontStyle, TextDecoration, Color;
+import 'package:flutter/material.dart' show TextStyle, FontWeight, FontStyle, TextDecoration, Color, BuildContext;
+import '../theme/text_styles.dart';
 
 extension TextStyleExtensions on TextStyle {
   TextStyle get italic => copyWith(fontStyle: FontStyle.italic);
@@ -11,4 +12,8 @@ extension TextStyleExtensions on TextStyle {
   TextStyle withLetterSpacing(double spacing) => copyWith(letterSpacing: spacing);
   TextStyle withFontWeight(FontWeight weight) => copyWith(fontWeight: weight);
   TextStyle withFontColor(Color color) => copyWith(color: color);
+}
+
+extension AppTextStyleExtension on BuildContext {
+  AppTextStyleAccessor get appTextStyles => AppTextStyleAccessor(this);
 }

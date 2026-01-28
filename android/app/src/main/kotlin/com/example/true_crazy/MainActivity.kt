@@ -1,4 +1,4 @@
-package com.example.true_crazy
+package com.example.truly_crazy
 
 import io.flutter.embedding.android.FlutterActivity
 
